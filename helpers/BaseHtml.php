@@ -342,12 +342,12 @@ class BaseHtml
             // we use hidden fields to add them back
             foreach (explode('&', substr($action, $pos + 1)) as $pair) {
                 if (($pos1 = strpos($pair, '=')) !== false) {
-                    $hiddenInputs[] = static::hiddenInput(
+                    $hiddenInputs[urldecode(substr($pair, 0, $pos1))] = static::hiddenInput(
                         urldecode(substr($pair, 0, $pos1)),
                         urldecode(substr($pair, $pos1 + 1))
                     );
                 } else {
-                    $hiddenInputs[] = static::hiddenInput(urldecode($pair), '');
+                    $hiddenInputs[urldecode($pair)] = static::hiddenInput(urldecode($pair), '');
                 }
             }
             $action = substr($action, 0, $pos);
